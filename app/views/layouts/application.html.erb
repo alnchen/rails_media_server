@@ -7,6 +7,14 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
+  
+  <div class="errors">
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+        <%= error %>
+      <% end %>
+    <% end %>
+  </div>
 
   <body>
     <%= yield %>

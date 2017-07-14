@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
      params[:user][:name],
      params[:user][:password]
    )
-
+   
    if @user
      sign_in(@user)
      redirect_to subs_url

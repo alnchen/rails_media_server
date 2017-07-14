@@ -1,0 +1,15 @@
+<h1>NEW SUB</h1>
+<h1><%= @user.name %></h1>
+
+<form action="/subs" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+
+  <label>title</label>
+  <input type="text" name="sub[title]" value="">
+
+  <label>description</label>
+  <input type="text" name="sub[description]" value="">
+
+  <input type="submit" name="" value="">
+
+</form>

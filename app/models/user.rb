@@ -6,13 +6,15 @@ class User < ApplicationRecord
   before_validation :ensure_session_token
   attr_reader :password
 
+  has_many :subs, primary_key: :id, foreign_key: :moderator_id, class_name: 'sub'
+
   def ensure_session_token
     self.session_token ||= SecureRandom::urlsafe_base64(16)
   end
 
   def self.find_by_credentials(name, password)
     user = User.find_by(name: name)
-    user.is_password?(password) ? user : nil
+    user.try(:is_password?, password) ? user : nil
   end
 
   def password=(password)
