@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_url unless signed_in?
   end
 
+  def require_signed_out!
+    redirect_to new_sub_url if signed_in?
+  end
+
   def sign_in(user)
     @current_user = user
     session[:token] = user.reset_session_token

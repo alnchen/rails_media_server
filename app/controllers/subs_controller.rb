@@ -1,12 +1,14 @@
 class SubsController < ApplicationController
+  before_action :require_signed_in, except: [:index, :show]
 
   def new
+    # @user = @current_user
     @sub = Sub.new
     render :new
   end
 
   def create
-    @user = @current_user
+    # @user = @current_user
     @sub = Sub.new(sub_params)
     @sub.moderator_id = @current_user.id
     if @sub.save

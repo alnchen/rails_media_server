@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  before_action :require_signed_in, only: [:show]
+  before_action :require_signed_in, only: [:destroy]
+  before_action :require_signed_out!, only: [:new, :create]
 
   def new
     render :new
@@ -10,7 +11,7 @@ class SessionsController < ApplicationController
      params[:user][:name],
      params[:user][:password]
    )
-   
+
    if @user
      sign_in(@user)
      redirect_to subs_url
