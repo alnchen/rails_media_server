@@ -14,21 +14,30 @@ class CommentsController < ApplicationController
     end
   end
 
-  def index
-  end
-
   def edit
+    @sub = Comment.find(params[:id])
+    render :edit
   end
 
   def update
+    @sub = Comment.find(params[:id])
+    if @sub.update(sub_params)
+      redirect_to @sub
+    else
+      flash.now[:errors] = @sub.errors.full_messages
+      render :edit
+    end
   end
 
   def show
+    @sub = Comment.find(params[:id])
+    render :show
   end
 
-  def destroy
+  def index
+    @subs = Comment.all
+    render :index
   end
-
 
   def comment_params
     params.require(:comment).permit(:title, :body)
